@@ -1,0 +1,36 @@
+-- Total Metrics
+SELECT 
+    SUM(impressions) AS total_impressions,
+    SUM(clicks) AS total_clicks,
+    SUM(conversions) AS total_conversions,
+    SUM(spend) AS total_spend
+FROM campaign_data;
+
+-- CTR
+SELECT 
+    campaign,
+    SUM(clicks)*1.0 / SUM(impressions) AS ctr
+FROM campaign_data
+GROUP BY campaign;
+
+-- Conversion Rate
+SELECT 
+    campaign,
+    SUM(conversions)*1.0 / SUM(clicks) AS conversion_rate
+FROM campaign_data
+GROUP BY campaign;
+
+-- Cost Per Conversion
+SELECT 
+    campaign,
+    SUM(spend)*1.0 / SUM(conversions) AS cost_per_conversion
+FROM campaign_data
+GROUP BY campaign;
+
+-- Daily Performance Trend
+SELECT 
+    date,
+    SUM(clicks) AS total_clicks,
+    SUM(conversions) AS total_conversions
+FROM campaign_data
+GROUP BY date;
